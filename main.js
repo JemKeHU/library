@@ -6,16 +6,25 @@ const submitButton = document.querySelector("dialog button");
 const myForm = document.querySelector("#book-form");
 const bookContainer = document.querySelector("#container");
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
+// function Book(title, author, pages, read) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.read = read;
+// }
 
-Book.prototype.sayInfo = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, Read: ${this.read}`;
-};
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  getInfo() {
+    return `${this.title} by ${this.author}, ${this.pages} pages, Read: ${this.read}`;
+  }
+}
 
 function addBookToLibrary(bookObj) {
   myLibrary.push(bookObj);
@@ -32,7 +41,7 @@ function displayLibrary() {
 
     // Display book info
     const bookInfo = document.createElement("p");
-    bookInfo.textContent = book.sayInfo();
+    bookInfo.textContent = book.getInfo();
     bookElement.appendChild(bookInfo);
 
     // Create Delete button
@@ -54,7 +63,7 @@ function displayLibrary() {
     // Toggle read status event
     readStatusButton.addEventListener("click", () => {
       book.read = book.read === "Yes" ? "No" : "Yes"; // Toggle status
-      bookInfo.textContent = book.sayInfo(); // Update displayed info
+      bookInfo.textContent = book.getInfo(); // Update displayed info
     });
 
     // Append buttons to book element
